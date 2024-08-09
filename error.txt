@@ -1,0 +1,127 @@
+2024-08-07T22:58:37.305109Z	info	FLAG: --concurrency="0"
+2024-08-07T22:58:37.305268Z	info	FLAG: --domain="istio-system.svc.cluster.local"
+2024-08-07T22:58:37.305292Z	info	FLAG: --help="false"
+2024-08-07T22:58:37.305315Z	info	FLAG: --log_as_json="false"
+2024-08-07T22:58:37.305341Z	info	FLAG: --log_caller=""
+2024-08-07T22:58:37.305448Z	info	FLAG: --log_output_level="default:info"
+2024-08-07T22:58:37.305471Z	info	FLAG: --log_rotate=""
+2024-08-07T22:58:37.305495Z	info	FLAG: --log_rotate_max_age="30"
+2024-08-07T22:58:37.305514Z	info	FLAG: --log_rotate_max_backups="1000"
+2024-08-07T22:58:37.305532Z	info	FLAG: --log_rotate_max_size="104857600"
+2024-08-07T22:58:37.305551Z	info	FLAG: --log_stacktrace_level="default:none"
+2024-08-07T22:58:37.305591Z	info	FLAG: --log_target="[stdout]"
+2024-08-07T22:58:37.305618Z	info	FLAG: --meshConfig="./etc/istio/config/mesh"
+2024-08-07T22:58:37.305637Z	info	FLAG: --outlierLogPath=""
+2024-08-07T22:58:37.305821Z	info	FLAG: --profiling="true"
+2024-08-07T22:58:37.305853Z	info	FLAG: --proxyComponentLogLevel="misc:error"
+2024-08-07T22:58:37.305879Z	info	FLAG: --proxyLogLevel="warning"
+2024-08-07T22:58:37.305910Z	info	FLAG: --serviceCluster="istio-proxy"
+2024-08-07T22:58:37.307009Z	info	FLAG: --stsPort="0"
+2024-08-07T22:58:37.307039Z	info	FLAG: --templateFile=""
+2024-08-07T22:58:37.307058Z	info	FLAG: --tokenManagerPlugin="GoogleTokenExchange"
+2024-08-07T22:58:37.307090Z	info	FLAG: --vklog="0"
+2024-08-07T22:58:37.307109Z	info	Version 1.22.3-1e0dc8dd88091532084e55b18efbd5c066516571-Clean
+2024-08-07T22:58:37.307485Z	info	Set max file descriptors (ulimit -n) to: 1048576
+2024-08-07T22:58:37.311657Z	info	Proxy role	ips=[10.244.0.4] type=router id=istio-ingressgateway-75fdb574c4-vwtts.istio-system domain=istio-system.svc.cluster.local
+2024-08-07T22:58:37.312817Z	info	Apply mesh config from file accessLogFile: /dev/stdout
+defaultConfig:
+  discoveryAddress: istiod.istio-system.svc:15012
+defaultProviders:
+  metrics:
+  - prometheus
+enablePrometheusMerge: true
+extensionProviders:
+- envoyOtelAls:
+    port: 4317
+    service: opentelemetry-collector.observability.svc.cluster.local
+  name: otel
+- name: skywalking
+  skywalking:
+    port: 11800
+    service: tracing.istio-system.svc.cluster.local
+- name: otel-tracing
+  opentelemetry:
+    port: 4317
+    service: opentelemetry-collector.observability.svc.cluster.local
+rootNamespace: istio-system
+trustDomain: cluster.local
+2024-08-07T22:58:37.318625Z	info	cpu limit detected as 2, setting concurrency
+2024-08-07T22:58:37.319533Z	info	Effective config: binaryPath: /usr/local/bin/envoy
+concurrency: 2
+configPath: ./etc/istio/proxy
+controlPlaneAuthPolicy: MUTUAL_TLS
+discoveryAddress: istiod.istio-system.svc:15012
+drainDuration: 45s
+proxyAdminPort: 15000
+serviceCluster: istio-proxy
+statNameLength: 189
+statusPort: 15020
+terminationDrainDuration: 5s
+
+2024-08-07T22:58:37.319716Z	info	JWT policy is third-party-jwt
+2024-08-07T22:58:37.319746Z	info	using credential fetcher of JWT type in cluster.local trust domain
+2024-08-07T22:58:37.525360Z	info	Workload SDS socket not found. Starting Istio SDS Server
+2024-08-07T22:58:37.525689Z	info	CA Endpoint istiod.istio-system.svc:15012, provider Citadel
+2024-08-07T22:58:37.525853Z	info	Using CA istiod.istio-system.svc:15012 cert with certs: var/run/secrets/istio/root-cert.pem
+2024-08-07T22:58:37.525507Z	info	Opening status port 15020
+2024-08-07T22:58:37.554378Z	info	ads	All caches have been synced up in 250.498505ms, marking server ready
+2024-08-07T22:58:37.554763Z	info	xdsproxy	Initializing with upstream address "istiod.istio-system.svc:15012" and cluster "Kubernetes"
+2024-08-07T22:58:37.555394Z	info	sds	Starting SDS grpc server
+2024-08-07T22:58:37.555507Z	info	sds	Starting SDS server for workload certificates, will listen on "./var/run/secrets/workload-spiffe-uds/socket"
+2024-08-07T22:58:37.556524Z	info	starting Http service at 127.0.0.1:15004
+2024-08-07T22:58:37.558347Z	info	Pilot SAN: [istiod.istio-system.svc]
+2024-08-07T22:58:37.560288Z	info	Starting proxy agent
+2024-08-07T22:58:37.560766Z	info	Envoy command: [-c etc/istio/proxy/envoy-rev.json --drain-time-s 45 --drain-strategy immediate --local-address-ip-version v4 --file-flush-interval-msec 1000 --disable-hot-restart --allow-unknown-static-fields -l warning --component-log-level misc:error --concurrency 2]
+2024-08-07T22:58:37.688705Z	warning	envoy main external/envoy/source/server/server.cc:835	Usage of the deprecated runtime key overload.global_downstream_max_connections, consider switching to `envoy.resource_monitors.downstream_connections` instead.This runtime key will be removed in future.	thread=16
+2024-08-07T22:58:37.690136Z	warning	envoy main external/envoy/source/server/server.cc:928	There is no configured limit to the number of allowed active downstream connections. Configure a limit in `envoy.resource_monitors.downstream_connections` resource monitor.	thread=16
+2024-08-07T22:58:37.709462Z	info	xdsproxy	connected to delta upstream XDS server: istiod.istio-system.svc:15012	id=1
+2024-08-07T22:58:37.766394Z	info	ads	ADS: new connection for node:istio-ingressgateway-75fdb574c4-vwtts.istio-system-1
+2024-08-07T22:58:37.779361Z	info	ads	ADS: new connection for node:istio-ingressgateway-75fdb574c4-vwtts.istio-system-2
+2024-08-07T22:58:37.786676Z	info	cache	generated new workload certificate	latency=229.542756ms ttl=23h59m59.213341489s
+2024-08-07T22:58:37.786805Z	info	cache	Root cert has changed, start rotating root cert
+2024-08-07T22:58:37.787523Z	info	ads	XDS: Incremental Pushing ConnectedEndpoints:2 Version:
+2024-08-07T22:58:37.787716Z	info	cache	returned workload trust anchor from cache	ttl=23h59m59.212300574s
+2024-08-07T22:58:37.787866Z	info	cache	returned workload certificate from cache	ttl=23h59m59.212153042s
+2024-08-07T22:58:37.788376Z	info	ads	SDS: PUSH request for node:istio-ingressgateway-75fdb574c4-vwtts.istio-system resources:1 size:4.0kB resource:default
+2024-08-07T22:58:37.788687Z	info	cache	returned workload trust anchor from cache	ttl=23h59m59.211329179s
+2024-08-07T22:58:37.788957Z	info	ads	SDS: PUSH request for node:istio-ingressgateway-75fdb574c4-vwtts.istio-system resources:1 size:1.1kB resource:ROOTCA
+2024-08-07T22:58:37.792211Z	info	cache	returned workload trust anchor from cache	ttl=23h59m59.207808686s
+2024-08-07T22:58:38.818393Z	info	Readiness succeeded in 1.539117175s
+2024-08-07T22:58:38.821328Z	info	Envoy proxy is ready
+2024-08-07T23:28:47.097118Z	info	xdsproxy	connected to delta upstream XDS server: istiod.istio-system.svc:15012	id=2
+2024-08-08T07:58:32.666487Z	warning	envoy config external/envoy/source/extensions/config_subscription/grpc/grpc_stream.h:155	DeltaAggregatedResources gRPC config stream to xds-grpc closed: 13, 	thread=16
+2024-08-08T07:58:35.084995Z	info	xdsproxy	connected to delta upstream XDS server: istiod.istio-system.svc:15012	id=3
+2024-08-08T08:52:07.272186Z	info	xdsproxy	connected to delta upstream XDS server: istiod.istio-system.svc:15012	id=4
+2024-08-08T09:24:45.217360Z	info	xdsproxy	connected to delta upstream XDS server: istiod.istio-system.svc:15012	id=5
+[2024-08-08T09:34:17.474Z] "GET /pokemon.Pokemon/legendary HTTP/1.1" 502 - via_upstream - "-" 0 87 22 21 "10.244.0.1" "curl/8.7.1" "ef52c272-e056-9979-a468-030c38bf4324" "10.111.103.197" "10.244.0.9:50051" outbound|80||grpc-service.default.svc.cluster.local 10.244.0.4:53454 10.244.0.4:8080 10.244.0.1:19581 - -
+[2024-08-08T09:34:21.275Z] "GET /pokemon.Pokemon/legendary HTTP/1.1" 502 - via_upstream - "-" 0 87 3 2 "10.244.0.1" "curl/8.7.1" "029a5857-047a-9f77-9a02-5fab26d6cb87" "10.111.103.197" "10.244.0.9:50051" outbound|80||grpc-service.default.svc.cluster.local 10.244.0.4:53454 10.244.0.4:8080 10.244.0.1:6051 - -
+[2024-08-08T09:35:37.329Z] "GET /pokemon.Pokemon/GetLegendaryPokemons HTTP/1.1" 502 - via_upstream - "-" 0 87 3 2 "10.244.0.1" "curl/8.7.1" "5ec65d21-9a1e-9f8a-b36a-46c874bd4768" "10.111.103.197" "10.244.0.9:50051" outbound|80||grpc-service.default.svc.cluster.local 10.244.0.4:53454 10.244.0.4:8080 10.244.0.1:1964 - -
+[2024-08-08T09:35:49.182Z] "GET /pokemon.Pokemon/legendary HTTP/1.1" 502 - via_upstream - "-" 0 87 3 3 "10.244.0.1" "curl/8.7.1" "8a88bd32-9ad2-9f13-a934-772a89922ea1" "10.111.103.197" "10.244.0.9:50051" outbound|80||grpc-service.default.svc.cluster.local 10.244.0.4:53454 10.244.0.4:8080 10.244.0.1:53322 - -
+[2024-08-08T09:37:18.047Z] "GET /legendary HTTP/1.1" 404 NR route_not_found - "-" 0 0 0 - "10.244.0.1" "curl/8.7.1" "97526c1c-3e35-9611-ac0c-99230f8b8844" "10.111.103.197" "-" - - 10.244.0.4:8080 10.244.0.1:25482 - -
+[2024-08-08T09:37:23.091Z] "GET /legendary HTTP/1.1" 404 NR route_not_found - "-" 0 0 0 - "10.244.0.1" "curl/8.7.1" "4ca5acf1-e076-99bb-b27c-66837a8b4324" "10.111.103.197" "-" - - 10.244.0.4:8080 10.244.0.1:6809 - -
+[2024-08-08T09:39:08.274Z] "GET /legendary HTTP/1.1" 404 NR route_not_found - "-" 0 0 0 - "10.244.0.1" "PostmanRuntime/7.37.3" "c5abea39-db5e-9567-9188-9ece7edd84ab" "10.111.103.197" "-" - - 10.244.0.4:8080 10.244.0.1:3063 - -
+[2024-08-08T09:39:26.227Z] "GET /legendary HTTP/1.1" 404 NR route_not_found - "-" 0 0 0 - "10.244.0.1" "PostmanRuntime/7.37.3" "8e17ae13-5459-95be-b7a1-a08de4eb4357" "10.111.103.197" "-" - - 10.244.0.4:8080 10.244.0.1:3063 - -
+[2024-08-08T09:39:52.007Z] "GET /pokemon.Pokemon/legendary HTTP/1.1" 502 - via_upstream - "-" 0 87 6 5 "10.244.0.1" "PostmanRuntime/7.37.3" "d04acf9c-9b5c-92ed-a166-97707e755356" "10.111.103.197" "10.244.0.9:50051" outbound|80||grpc-service.default.svc.cluster.local 10.244.0.4:43530 10.244.0.4:8080 10.244.0.1:3063 - -
+[2024-08-08T09:39:59.406Z] "GET /pokemon/legendary HTTP/1.1" 404 NR route_not_found - "-" 0 0 0 - "10.244.0.1" "PostmanRuntime/7.37.3" "e65bd9db-f855-9660-a1c1-4060c55fe77f" "10.111.103.197" "-" - - 10.244.0.4:8080 10.244.0.1:3063 - -
+[2024-08-08T09:40:09.215Z] "GET /legendary HTTP/1.1" 404 NR route_not_found - "-" 0 0 0 - "10.244.0.1" "PostmanRuntime/7.37.3" "5b90fdcb-cd9a-9c74-ae46-f9bd876f978b" "10.111.103.197" "-" - - 10.244.0.4:8080 10.244.0.1:3063 - -
+[2024-08-08T09:40:42.029Z] "GET /getlegendarypokemons HTTP/1.1" 404 NR route_not_found - "-" 0 0 0 - "10.244.0.1" "PostmanRuntime/7.37.3" "7dcdfbd3-4f40-96c9-8ab3-f1922d0719d6" "10.111.103.197" "-" - - 10.244.0.4:8080 10.244.0.1:3063 - -
+[2024-08-08T09:40:47.523Z] "GET / HTTP/1.1" 404 NR route_not_found - "-" 0 0 0 - "10.244.0.1" "PostmanRuntime/7.37.3" "469c2378-3700-9d61-a5cd-5445c97e1266" "10.111.103.197" "-" - - 10.244.0.4:8080 10.244.0.1:3063 - -
+[2024-08-08T09:40:54.123Z] "GET / HTTP/1.1" 404 NR route_not_found - "-" 0 0 0 - "10.244.0.1" "PostmanRuntime/7.37.3" "f4e34ede-6e00-99ab-9650-e8b63a863071" "10.111.103.197" "-" - - 10.244.0.4:8080 10.244.0.1:3063 - -
+[2024-08-08T09:41:03.162Z] "GET /legendary HTTP/1.1" 404 NR route_not_found - "-" 0 0 0 - "10.244.0.1" "PostmanRuntime/7.37.3" "0fe4cf5d-a683-941e-8ad5-124f35579e02" "10.111.103.197" "-" - - 10.244.0.4:8080 10.244.0.1:3063 - -
+[2024-08-08T09:49:38.688Z] "GET /legendary HTTP/1.1" 404 NR route_not_found - "-" 0 0 0 - "10.244.0.1" "PostmanRuntime/7.37.3" "fa69f639-6d0a-9b0c-8f11-625519ce501a" "10.111.103.197" "-" - - 10.244.0.4:8080 10.244.0.1:14603 - -
+[2024-08-08T09:49:51.495Z] "GET /pokemon.Pokemon/legendary HTTP/1.1" 502 - via_upstream - "-" 0 87 7 6 "10.244.0.1" "PostmanRuntime/7.37.3" "babb2f79-f2f4-9a62-b775-f578f3db48e1" "10.111.103.197" "10.244.0.9:50051" outbound|80||grpc-service.default.svc.cluster.local 10.244.0.4:43530 10.244.0.4:8080 10.244.0.1:14603 - -
+[2024-08-08T09:50:01.838Z] "GET /pokemon/legendary HTTP/1.1" 404 NR route_not_found - "-" 0 0 0 - "10.244.0.1" "PostmanRuntime/7.37.3" "05087ede-9d55-90e8-af1f-ef3571fa7e11" "10.111.103.197" "-" - - 10.244.0.4:8080 10.244.0.1:14603 - -
+[2024-08-08T09:50:10.680Z] "GET /legendary HTTP/1.1" 404 NR route_not_found - "-" 0 0 0 - "10.244.0.1" "PostmanRuntime/7.37.3" "4965db89-b000-94c4-97e9-34f15abdcabc" "10.111.103.197" "-" - - 10.244.0.4:8080 10.244.0.1:14603 - -
+[2024-08-08T09:50:19.532Z] "GET /getlegendarypokemon HTTP/1.1" 404 NR route_not_found - "-" 0 0 0 - "10.244.0.1" "PostmanRuntime/7.37.3" "1ae7ab2b-9a42-9bf2-a5f1-d34d9d17ee1a" "10.111.103.197" "-" - - 10.244.0.4:8080 10.244.0.1:14603 - -
+[2024-08-08T09:50:31.515Z] "GET /legendary HTTP/1.1" 404 NR route_not_found - "-" 0 0 0 - "10.244.0.1" "PostmanRuntime/7.37.3" "2d58d539-3772-9b6d-b20f-cce56511f646" "10.111.103.197" "-" - - 10.244.0.4:8080 10.244.0.1:14603 - -
+2024-08-08T09:52:31.377376Z	info	xdsproxy	connected to delta upstream XDS server: istiod.istio-system.svc:15012	id=6
+[2024-08-08T09:54:50.547Z] "GET /pokemon/legendary HTTP/1.1" 502 - via_upstream - "-" 0 87 4 3 "10.244.0.1" "PostmanRuntime/7.37.3" "20173910-5ee0-987e-ac87-dcb73837f79e" "10.111.103.197" "10.244.0.9:50051" outbound|80||grpc-service.default.svc.cluster.local 10.244.0.4:43530 10.244.0.4:8080 10.244.0.1:14603 - -
+[2024-08-08T09:54:56.885Z] "GET /pokemon/legendary HTTP/1.1" 502 - via_upstream - "-" 0 87 3 2 "10.244.0.1" "PostmanRuntime/7.37.3" "f8b7da3d-d331-99ca-98b4-a1f6b56cc841" "10.111.103.197" "10.244.0.9:50051" outbound|80||grpc-service.default.svc.cluster.local 10.244.0.4:43530 10.244.0.4:8080 10.244.0.1:14603 - -
+[2024-08-08T09:55:15.645Z] "GET /pokemonsdf/legendary HTTP/1.1" 404 NR route_not_found - "-" 0 0 0 - "10.244.0.1" "PostmanRuntime/7.37.3" "46f5309d-cbc8-9870-b5c8-31c71b4dfe2f" "10.111.103.197" "-" - - 10.244.0.4:8080 10.244.0.1:14603 - -
+[2024-08-08T09:55:18.709Z] "GET /pokemonsdf/legendary HTTP/1.1" 404 NR route_not_found - "-" 0 0 0 - "10.244.0.1" "PostmanRuntime/7.37.3" "f0f0c6d4-653c-9fde-8b19-7f544618530f" "10.111.103.197" "-" - - 10.244.0.4:8080 10.244.0.1:14603 - -
+[2024-08-08T09:55:23.950Z] "GET /pokemon/legendary HTTP/1.1" 502 - via_upstream - "-" 0 87 4 2 "10.244.0.1" "PostmanRuntime/7.37.3" "4b3c4cb9-eaa3-95a1-869c-67dc74b9dd7d" "10.111.103.197" "10.244.0.9:50051" outbound|80||grpc-service.default.svc.cluster.local 10.244.0.4:43530 10.244.0.4:8080 10.244.0.1:14603 - -
+[2024-08-08T09:57:36.552Z] "GET /pokemon/lege HTTP/1.1" 502 - via_upstream - "-" 0 87 4 3 "10.244.0.1" "PostmanRuntime/7.37.3" "cf191b03-0ae2-934a-a652-aa068dde377b" "10.111.103.197" "10.244.0.9:50051" outbound|80||grpc-service.default.svc.cluster.local 10.244.0.4:43530 10.244.0.4:8080 10.244.0.1:14603 - -
+[2024-08-08T09:57:40.755Z] "GET /pokemon/ HTTP/1.1" 502 - via_upstream - "-" 0 87 3 2 "10.244.0.1" "PostmanRuntime/7.37.3" "20b0c86f-de6e-9518-98b6-6986c3de96a5" "10.111.103.197" "10.244.0.9:50051" outbound|80||grpc-service.default.svc.cluster.local 10.244.0.4:43530 10.244.0.4:8080 10.244.0.1:14603 - -
+[2024-08-08T09:57:43.946Z] "GET /pokemodn/ HTTP/1.1" 404 NR route_not_found - "-" 0 0 0 - "10.244.0.1" "PostmanRuntime/7.37.3" "68ac26e8-f8b4-974b-a442-7a382976e877" "10.111.103.197" "-" - - 10.244.0.4:8080 10.244.0.1:14603 - -
+[2024-08-08T09:57:49.244Z] "GET /pokemon/ HTTP/1.1" 502 - via_upstream - "-" 0 87 3 2 "10.244.0.1" "PostmanRuntime/7.37.3" "b6d04d40-f256-9ebf-ae25-de788e5367eb" "10.111.103.197" "10.244.0.9:50051" outbound|80||grpc-service.default.svc.cluster.local 10.244.0.4:43530 10.244.0.4:8080 10.244.0.1:14603 - -
+[2024-08-08T09:57:53.211Z] "GET /pokemon/legendary HTTP/1.1" 502 - via_upstream - "-" 0 87 2 2 "10.244.0.1" "PostmanRuntime/7.37.3" "76223fd7-4b35-9e9b-a06e-2edc76bdb1a7" "10.111.103.197" "10.244.0.9:50051" outbound|80||grpc-service.default.svc.cluster.local 10.244.0.4:43530 10.244.0.4:8080 10.244.0.1:14603 - -

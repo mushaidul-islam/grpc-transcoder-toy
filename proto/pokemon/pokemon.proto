@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package pokemon;
+
+import "google/api/annotations.proto";
+option go_package = "/pokemon_service";
+
+service Pokemon {
+    rpc GetLegendaryPokemons (EmptyRequest) returns (PokemonListResponse) {
+      option (google.api.http) = {
+        get: "/legendary"
+      };
+    }
+}
+
+message EmptyRequest {
+
+}
+
+message PokemonListResponse {
+  repeated PokemonData data = 1 ;
+}
+
+message PokemonData {
+  string name = 1;
+  string type = 2;
+}
+

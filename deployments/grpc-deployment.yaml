@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: grpc-server
+  labels:
+    app: grpc-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: grpc-server
+  template:
+    metadata:
+      annotations:
+        sidecar.istio.io/inject: "true"
+      labels:
+        app: grpc-server
+    spec:
+      containers:
+        - name: grpc-server
+          image: grpc-transcoder-toy:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 50051
+          volumeMounts:
+            - name: proto-volume
+              mountPath: /etc/proto
+              subPath: protos.pb
+      volumes:
+        - name: proto-volume
+          configMap:
+            name: grpc-proto-config

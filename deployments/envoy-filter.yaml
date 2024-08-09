@@ -1,0 +1,42 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: EnvoyFilter
+metadata:
+  name: grpc-json-transcoder
+spec:
+  workloadSelector:
+    labels:
+      app: grpc-server
+  configPatches:
+    - applyTo: NETWORK_FILTER
+      match:
+        listener:
+          portNumber: 80
+          filterChain:
+            filter:
+              name: "envoy.filters.network.http_connection_manager"
+      patch:
+        operation: MERGE
+        value:
+          name: envoy.filters.network.http_connection_manager
+          typed_config:
+            "@type": type.googleapis.com/envoy.extensions.filters.network.http_connection_manager.v3.HttpConnectionManager
+            http_filters:
+              - name: envoy.filters.http.grpc_json_transcoder
+                typed_config:
+                  "@type": type.googleapis.com/envoy.extensions.filters.http.grpc_json_transcoder.v3.GrpcJsonTranscoder
+                  proto_descriptor: /etc/proto/protos.pb
+                  services:
+                    - pokemon.Pokemon
+                  print_options:
+                    add_whitespace: true
+                    always_print_primitive_fields: true
+                    always_print_enums_as_ints: false
+                    preserve_proto_field_names: false
+    - applyTo: CLUSTER
+      match:
+        cluster:
+          service: grpc-service
+      patch:
+        operation: MERGE
+        value:
+          http2_protocol_options: {}
